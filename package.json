@@ -1,0 +1,26 @@
+{
+  "name": "100day-challenge-milestone-project-online-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeongsangtae/100day-challenge-milestone-project-online-store.git"
+  },
+  "keywords": [],
+  "author": "Jeong sang tae",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeongsangtae/100day-challenge-milestone-project-online-store/issues"
+  },
+  "homepage": "https://github.com/jeongsangtae/100day-challenge-milestone-project-online-store#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
