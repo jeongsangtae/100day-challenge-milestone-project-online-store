@@ -5,7 +5,44 @@
   <main>
     <h1>Create New Account</h1>
     <form action="" method="">
-
+      <p>
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" required>
+      </p>
+      <p>
+        <label for="confirm-email">이메일 확인</label>
+        <input type="email" id="confirm-email" name="confirm-email" required>
+      </p>
+      <p>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" minlength="6" required>
+      </p>
+      <hr>
+      <p>
+        <label for="fullname">이름</label>
+        <input type="text" id="fullname" name="fullname" required>
+      </p>
+      <p>
+        <label for="street">주소</label>
+        <input type="text" id="street" name="street" required>
+      </p>
+      <p>
+        <label for="postal">우편번호</label>
+        <input 
+          type="text" 
+          id="postal" 
+          name="postal" 
+          minlength="5" 
+          maxlength="5"
+          required
+        >
+      </p>
+      <p>
+        <label for="city">도시</label>
+        <input type="text" id="city" name="city" required>
+      </p>
+      <button class="btn">계정 만들기</button>
+      <p id="switch-form"><a href="/login">로그인</a></p>
     </form>
   </main>
 <%- include('../includes/footer')  %>
