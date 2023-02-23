@@ -1,9 +1,9 @@
-<%- include('../includes/head', { pageTitle: '가입하기' })  %>
+<%- include('../../shared/includes/head', { pageTitle: '가입하기' })  %>
 <link rel="stylesheet" href="/styles/forms.css">
 <link rel="stylesheet" href="/styles/auth.css">
 </head>
 <body>
-  <%- include('../includes/header')  %>
+  <%- include('../../shared/includes/header')  %>
   <main>
     <h1>새 계정 만들기</h1>
     <form action="/signup" method="POST">
@@ -48,4 +48,4 @@
       <p id="switch-form"><a href="/login">로그인</a></p>
     </form>
   </main>
-<%- include('../includes/footer')  %>
+<%- include('../../shared/includes/footer')  %>
