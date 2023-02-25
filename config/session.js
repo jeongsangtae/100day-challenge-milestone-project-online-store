@@ -17,7 +17,7 @@ function createSessionConfig() {
   return {
     secret: "super-secret",
     resave: false,
-    saveUninitalized: false,
+    saveUninitialized: false,
     store: createSessionStore(),
     cookie: {
       maxAge: 2 * 24 * 60 * 60 * 1000,
