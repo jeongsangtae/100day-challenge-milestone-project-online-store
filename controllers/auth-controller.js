@@ -1,12 +1,21 @@
 const User = require("../models/user-model");
 const authUtil = require("../util/authentication");
 const validation = require("../util/validation");
+const sessionFlash = require("../util/session-flash");
 
 function getSignup(req, res) {
   res.render("customer/auth/signup");
 }
 
 async function signup(req, res, next) {
+  const enteredData = {
+    email: req.body.email,
+    password: req.body.password,
+    fullname: req.body.fullname,
+    street: req.body.street,
+    postal: req.body.postal,
+    city: req.body.city,
+  };
   if (
     !validation.userDetailsAreValid(
       req.body.email,
@@ -18,7 +27,17 @@ async function signup(req, res, next) {
     ) ||
     !validation.emailIsConfirmed(req.body.email, req.body["confirm-email"])
   ) {
-    res.redirect("/signup");
+    sessionFlash.flashDataToSession(
+      req,
+      {
+        errorMessage:
+          "입력 내용을 확인하십시오. 비밀번호는 6자 이상이어야 합니다. 긴 우편 번호는 5자여야 합니다.",
+        ...enteredData,
+      },
+      function () {
+        res.redirect("/signup");
+      }
+    );
     return;
   }
 
@@ -35,7 +54,16 @@ async function signup(req, res, next) {
     const existsAlready = await user.existsAlready();
 
     if (existsAlready) {
-      res.redirect("/signup");
+      sessionFlash.flashDataToSession(
+        req,
+        {
+          errorMessage: "사용자가 이미 존재합니다! 대신 로그인해 보세요!",
+          ...enteredData,
+        },
+        function () {
+          res.redirect("/signup");
+        }
+      );
       return;
     }
 
@@ -62,8 +90,16 @@ async function login(req, res, next) {
     return;
   }
 
+  const sessionErrorData = {
+    errorMessage: "잘못된 자격 증명 - 이메일과 비밀번호를 다시 확인하십시오!",
+    email: user.email,
+    password: user.password,
+  };
+
   if (!existingUser) {
-    res.redirect("/login");
+    sessionFlash.flashDataToSession(req, sessionErrorData, function () {
+      res.redirect("/login");
+    });
     return;
   }
   const passwordIsCorrect = await user.hasMatchingPassword(
@@ -71,7 +107,9 @@ async function login(req, res, next) {
   );
 
   if (!passwordIsCorrect) {
-    res.redirect("/login");
+    sessionFlash.flashDataToSession(req, sessionErrorData, function () {
+      res.redirect("/login");
+    });
     return;
   }
 
