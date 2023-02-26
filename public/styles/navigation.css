@@ -113,7 +113,6 @@ main {
   }
 
   .nav-items button:hover {
-    border-color: transparent;
     background-color: var(--color-primary-500-bg);
   }
 
