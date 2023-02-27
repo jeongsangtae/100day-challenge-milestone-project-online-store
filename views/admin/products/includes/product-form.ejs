@@ -15,7 +15,12 @@
   </p>
   <p>
     <label for="image">이미지</label>
-    <input type="file" id="image" name="image" accept="image/png, image/jpg" />
+    <input
+      type="file"
+      id="image"
+      name="image"
+      accept="image/png, image/jpg"
+      <% if(imageRequired) { %>required<% } %> />
   </p>
   <p>
     <label for="summary">요약</label>
