@@ -1,0 +1,14 @@
+<article class="cart-item">
+  <div class="cart-item-info">
+    <h2><%= item.product.title %></h2>
+    <p>
+      <%= item.totalPrice %>원
+      <span class="cart-product-price">(<%= item.product.price %>원)</span>
+    </p>
+  </div>
+
+  <div class="cart-item-management">
+    <input type="number" value="<%= item.quantity %>" required />
+    <button class="btn">업데이트</button>
+  </div>
+</article>

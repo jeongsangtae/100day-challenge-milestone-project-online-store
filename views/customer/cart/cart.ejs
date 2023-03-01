@@ -1,0 +1,21 @@
+<%- include('../../shared/includes/head', { pageTitle: '장바구니' })  %>
+<link rel="stylesheet" href="/styles/cart.css">
+</head>
+<body>
+  <%- include('../../shared/includes/header')  %>
+  <main>
+    <h1>장바구니</h1>
+    <ul id="cart-items">
+      <% for (const cartItem of locals.cart.items) { %>
+      <li>
+        <%- include('includes/cart-item', { item: cartItem }) %>
+      </li>
+      <% } %>
+    </ul>
+    <div id="cart-total">
+      <p>총 가격: <%= locals.cart.totalPrice %>원</p>
+      
+      <button class="btn">제품 구매하기</button>
+    </div>
+  </main>
+<%- include('../../shared/includes/footer')  %>
