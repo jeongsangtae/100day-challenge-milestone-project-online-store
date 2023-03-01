@@ -1,6 +1,6 @@
-const { response } = require("express");
-
 const cartItemUpdateForms = document.querySelectorAll(".cart-item-management");
+const cartTotalPrice = document.getElementById("cart-total-price");
+const cartBadge = document.querySelector(".nav-items .badge");
 
 async function updateCartItem(event) {
   event.preventDefault();
@@ -35,6 +35,21 @@ async function updateCartItem(event) {
   }
 
   const responseData = await response.json();
+
+  //console.log(responseData);
+
+  if (responseData.updatedCartData.updatedItemPrice === 0) {
+    form.parentElement.parentElement.remove();
+  } else {
+    const cartItemTotalPrice =
+      form.parentElement.querySelector(".cart-item-price");
+    cartItemTotalPrice.innerHTML =
+      responseData.updatedCartData.updatedItemPrice;
+  }
+
+  cartTotalPrice.innerHTML = responseData.updatedCartData.newTotalPrice;
+
+  cartBadge.innerHTML = responseData.updatedCartData.newTotalQuantity;
 }
 
 for (const form of cartItemUpdateForms) {
