@@ -1,5 +1,6 @@
-<%- include('../../shared/includes/head', { pageTitle: '모든 제품' })  %>
+<%- include('../../shared/includes/head', { pageTitle: product.title })  %>
 <link rel="stylesheet" href="/styles/products.css">
+<script defer src="/scripts/cart-management.js"></script>
 </head>
 <body>
   <%- include('../../shared/includes/header')  %>
@@ -9,7 +10,7 @@
       <div id="product-info">
         <h1><%= product.title %></h1>
         <p><%= product.price %>원</p>
-        <button class="btn">장바구니 추가</button>
+        <button class="btn" data-productid="<%= product.id %>" data-csrf="<%= locals.csrfToken %>">장바구니 추가</button>
       </div>
     </header>
 
