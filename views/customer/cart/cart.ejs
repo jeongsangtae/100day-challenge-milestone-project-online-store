@@ -18,6 +18,7 @@
       
       <% if (locals.isAuth) { %>
         <form action="/orders" method="POST">
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
           <button class="btn">제품 구매하기</button>
         </form>
       <% } else { %>
