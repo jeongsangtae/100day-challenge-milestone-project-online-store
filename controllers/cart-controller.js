@@ -12,6 +12,7 @@ async function addCartItem(req, res, next) {
     next(error);
     return;
   }
+
   const cart = res.locals.cart;
 
   cart.addItem(product);
@@ -28,7 +29,7 @@ function updateCartItem(req, res) {
 
   const updatedItemData = cart.updateItem(
     req.body.productId,
-    req.body.quantity
+    +req.body.quantity
   );
 
   req.session.cart = cart;
