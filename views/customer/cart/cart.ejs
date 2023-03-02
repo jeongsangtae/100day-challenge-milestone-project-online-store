@@ -16,7 +16,13 @@
     <div id="cart-total">
       <p>총 가격: <span id="cart-total-price"><%= locals.cart.totalPrice %></span>원</p>
       
-      <button class="btn">제품 구매하기</button>
+      <% if (locals.isAuth) { %>
+        <form action="/orders" method="POST">
+          <button class="btn">제품 구매하기</button>
+        </form>
+      <% } else { %>
+        <p id="cart-total-fallback">계속 진행하고 항목을 구입하려면 로그인하십시오.</p>
+      <% } %>
     </div>
   </main>
 <%- include('../../shared/includes/footer')  %>
