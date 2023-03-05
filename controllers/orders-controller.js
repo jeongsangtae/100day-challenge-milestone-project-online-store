@@ -39,19 +39,35 @@ async function addOrder(req, res, next) {
     line_items: [
       {
         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: "{{PRICE_ID}}",
+        price_data: {
+          currency: "krw",
+          product_data: {
+            name: "Dummy",
+          },
+          unit_amount: 10000,
+        },
         quantity: 1,
       },
     ],
     mode: "payment",
-    success_url: `${YOUR_DOMAIN}/success.html`,
-    cancel_url: `${YOUR_DOMAIN}/cancel.html`,
+    success_url: `localhost:3000/orders/success`,
+    cancel_url: `localhost:3000/orders/cancel`,
   });
 
   res.redirect(303, session.url);
 }
 
+function getSuccess(req, res) {
+  res.render("customer/orders/success");
+}
+
+function getCancel(req, res) {
+  res.render("customer/orders/cancel");
+}
+
 module.exports = {
   getOrders: getOrders,
   addOrder: addOrder,
+  getSuccess: getSuccess,
+  getCancel: getCancel,
 };
