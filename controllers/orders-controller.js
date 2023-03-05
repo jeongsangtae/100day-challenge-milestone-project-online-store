@@ -17,6 +17,8 @@ async function getOrders(req, res) {
 }
 
 async function addOrder(req, res, next) {
+  const cart = res.locals.cart;
+
   let userDocument;
   try {
     userDocument = await User.findById(res.locals.uid);
@@ -36,22 +38,22 @@ async function addOrder(req, res, next) {
   req.session.cart = null;
 
   const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
+    line_items: cart.items.map(function (item) {
+      return {
         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
         price_data: {
           currency: "krw",
           product_data: {
-            name: "Dummy",
+            name: item.product.title,
           },
-          unit_amount: 10000,
+          unit_amount: +item.product.price,
         },
-        quantity: 1,
-      },
-    ],
+        quantity: item.quantity,
+      };
+    }),
     mode: "payment",
-    success_url: `localhost:3000/orders/success`,
-    cancel_url: `localhost:3000/orders/cancel`,
+    success_url: `http://localhost:3000/orders/success`,
+    cancel_url: `http://localhost:3000/orders/cancel`,
   });
 
   res.redirect(303, session.url);
